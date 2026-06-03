@@ -140,7 +140,7 @@ function mostrarResultados() {
     const gastoActual = parseFloat(document.getElementById('gastoActual').value);
     
     // Validar datos básicos
-    if (!ingresoFamiliar || !gastoAnterior || !gastoActual || 
+    if (isNaN(ingresoFamiliar) || isNaN(gastoAnterior) || isNaN(gastoActual) || 
         ingresoFamiliar < 0 || gastoAnterior < 0 || gastoActual < 0) {
         resultadosContainer.innerHTML = mostrarAlerta('danger', 'Validación', 
             'Por favor completa los campos de ingreso y gastos con valores válidos.');
@@ -189,7 +189,7 @@ function mostrarResultados() {
     document.getElementById('perdida-porcentaje').textContent = `${simulacionActual.porcentajePerdida.toFixed(1)}%`;
     document.getElementById('saldo-anterior').textContent = formatearMoneda(simulacionActual.saldoAnterior);
     
-    // CORRECCIÓN: Se cambió .textContent por .innerHTML para procesar las etiquetas span correctamente
+    // CORRECCIÓN: Se cambió .textContent por .innerHTML para renderizar la etiqueta span correctamente
     document.getElementById('saldo-actual').innerHTML = 
         `<span style="color: ${simulacionActual.saldoActual < 0 ? 'var(--color-danger)' : 'var(--color-success)'}">${formatearMoneda(simulacionActual.saldoActual)}</span>`;
     
@@ -333,30 +333,38 @@ function crearGraficoPoder() {
     });
 }
 
-// CORRECCIÓN: Se cambió container.innerHTML += html por insertAdjacentHTML
-// Esto evita que se destruyan y limpien los estados de los inputs previos al renderizar.
-function agregarProducto() {
+// CORRECCIÓN CRÍTICA: Ahora recibe un parámetro 'prod' opcional para evitar selectores inestables.
+// Además, usa insertAdjacentHTML para conservar los valores interactivos del DOM.
+function agregarProducto(prod = null) {
     const container = document.getElementById('productos-container');
     const id = proximoIdProducto++;
+    
+    // Validamos si efectivamente recibimos un objeto de producto válido (y no un evento PointerEvent)
+    const esProductoValido = prod && typeof prod === 'object' && 'nombre' in prod;
+    
+    const nombre = esProductoValido ? prod.nombre : '';
+    const precioAnterior = esProductoValido ? prod.precioAnterior : '';
+    const precioActual = esProductoValido ? prod.precioActual : '';
+    const cantidad = esProductoValido ? prod.cantidad : '';
     
     const html = `
         <div class="producto-item border rounded p-2 mb-2" id="producto-${id}">
             <div class="row g-2 align-items-end">
                 <div class="col-6">
                     <input type="text" class="form-control form-control-sm" 
-                           placeholder="Nombre producto" data-id="${id}" data-field="nombre">
+                           placeholder="Nombre producto" data-id="${id}" data-field="nombre" value="${nombre}">
                 </div>
                 <div class="col-3">
                     <input type="number" class="form-control form-control-sm" 
-                           placeholder="P. Ant." min="0" step="0.01" data-id="${id}" data-field="precioAnterior">
+                           placeholder="P. Ant." min="0" step="0.01" data-id="${id}" data-field="precioAnterior" value="${precioAnterior}">
                 </div>
                 <div class="col-3">
                     <input type="number" class="form-control form-control-sm" 
-                           placeholder="P. Act." min="0" step="0.01" data-id="${id}" data-field="precioActual">
+                           placeholder="P. Act." min="0" step="0.01" data-id="${id}" data-field="precioActual" value="${precioActual}">
                 </div>
                 <div class="col-3">
                     <input type="number" class="form-control form-control-sm" 
-                           placeholder="Cantidad" min="1" step="1" data-id="${id}" data-field="cantidad">
+                           placeholder="Cantidad" min="1" step="1" data-id="${id}" data-field="cantidad" value="${cantidad}">
                 </div>
                 <div class="col-3">
                     <button type="button" class="btn btn-outline-danger btn-sm w-100" 
@@ -379,7 +387,8 @@ function eliminarProducto(id) {
     }
 }
 
-// Cargar caso predefinido
+// CORRECCIÓN CRÍTICA: Se modificó la carga secuencial para delegar de forma directa el objeto
+// a agregarProducto(), evitando así selectores destructivos y fallas por referencias indefinidas.
 function cargarCaso(casoPredefinido) {
     document.getElementById('ingresoFamiliar').value = casoPredefinido.ingresoFamiliar;
     document.getElementById('gastoAnterior').value = casoPredefinido.gastoAnterior;
@@ -390,14 +399,9 @@ function cargarCaso(casoPredefinido) {
     const container = document.getElementById('productos-container');
     container.innerHTML = '';
     
-    // Cargar productos del caso
-    casoPredefinido.productos.forEach((prod, index) => {
-        agregarProducto();
-        const inputs = document.querySelectorAll('.producto-item:last-child input');
-        inputs[0].value = prod.nombre;
-        inputs[1].value = prod.precioAnterior;
-        inputs[2].value = prod.precioActual;
-        inputs[3].value = prod.cantidad;
+    // Cargar productos del caso de forma directa y segura
+    casoPredefinido.productos.forEach((prod) => {
+        agregarProducto(prod);
     });
     
     // Actualizar array de productos
@@ -419,7 +423,8 @@ function actualizarProductos() {
         const precioActual = parseFloat(inputs[2].value);
         const cantidad = parseInt(inputs[3].value);
         
-        if (nombre && precioAnterior && precioActual && cantidad) {
+        // CORRECCIÓN: Se cambió a !isNaN para evitar comportamientos falsos/nulos indeseados
+        if (nombre && !isNaN(precioAnterior) && !isNaN(precioActual) && !isNaN(cantidad)) {
             productos.push({
                 id: parseInt(inputs[0].dataset.id || 1),
                 nombre,
@@ -446,7 +451,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Botón agregar producto
     const btnAgregarProducto = document.getElementById('btn-agregar-producto');
     if (btnAgregarProducto) {
-        btnAgregarProducto.addEventListener('click', agregarProducto);
+        // CORRECCIÓN: Se encapsuló en una función de flecha anónima para evitar 
+        // enviar el objeto PointerEvent nativo como argumento a agregarProducto()
+        btnAgregarProducto.addEventListener('click', () => agregarProducto());
     }
     
     // Botones de casos predefinidos
