@@ -188,7 +188,9 @@ function mostrarResultados() {
     document.getElementById('incremento-bs').textContent = formatearMoneda(simulacionActual.incrementoGasto);
     document.getElementById('perdida-porcentaje').textContent = `${simulacionActual.porcentajePerdida.toFixed(1)}%`;
     document.getElementById('saldo-anterior').textContent = formatearMoneda(simulacionActual.saldoAnterior);
-    document.getElementById('saldo-actual').textContent = 
+    
+    // CORRECCIÓN: Se cambió .textContent por .innerHTML para procesar las etiquetas span correctamente
+    document.getElementById('saldo-actual').innerHTML = 
         `<span style="color: ${simulacionActual.saldoActual < 0 ? 'var(--color-danger)' : 'var(--color-success)'}">${formatearMoneda(simulacionActual.saldoActual)}</span>`;
     
     // Tabla de productos
@@ -331,7 +333,8 @@ function crearGraficoPoder() {
     });
 }
 
-// Agregar producto
+// CORRECCIÓN: Se cambió container.innerHTML += html por insertAdjacentHTML
+// Esto evita que se destruyan y limpien los estados de los inputs previos al renderizar.
 function agregarProducto() {
     const container = document.getElementById('productos-container');
     const id = proximoIdProducto++;
@@ -363,7 +366,7 @@ function agregarProducto() {
         </div>
     `;
     
-    container.innerHTML += html;
+    container.insertAdjacentHTML('beforeend', html);
 }
 
 // Eliminar producto
