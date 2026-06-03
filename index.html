@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crisis Economics Simulator | Escenarios de Crisis Socioeconómica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <!-- NAVBAR FIJA -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="brand-icon">⚡</span> Crisis Economics
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages/carburantes.html">Carburantes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages/escasez.html">Pánico de Compras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages/poder-adquisitivo.html">Poder Adquisitivo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero-section">
+        <div class="container-fluid h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title">
+                        Simulador de Crisis<br>
+                        <span class="text-gradient">Socioeconómica</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Comprende el impacto real de las crisis económicas mediante simulaciones interactivas
+                    </p>
+                    <div class="hero-buttons mt-5">
+                        <a href="#escenarios" class="btn btn-primary btn-lg me-3">Explorar Simuladores</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="hero-graphic">
+                        <div class="graphic-circle circle-1"></div>
+                        <div class="graphic-circle circle-2"></div>
+                        <div class="graphic-circle circle-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTEXTO GLOBAL -->
+    <section class="contexto-section py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Contexto Socioeconómico</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="context-card">
+                        <div class="card-icon">🛢️</div>
+                        <h3>Escasez de Carburantes</h3>
+                        <p>Analiza cómo la limitación de recursos estratégicos afecta el abastecimiento y la logística de una nación.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="context-card">
+                        <div class="card-icon">🛒</div>
+                        <h3>Pánico de Compras</h3>
+                        <p>Observa el comportamiento irracional del mercado cuando los rumores de escasez provocan demanda desmedida.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="context-card">
+                        <div class="card-icon">💰</div>
+                        <h3>Pérdida Adquisitiva</h3>
+                        <p>Comprende cómo la inflación afecta el poder de compra de las familias con ingresos congelados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESCENARIOS INTERACTIVOS -->
+    <section id="escenarios" class="escenarios-section py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Tres Simuladores Educativos</h2>
+            <div class="row g-4">
+                <!-- Escenario A: Carburantes -->
+                <div class="col-lg-4">
+                    <div class="scenario-card scenario-fuel">
+                        <div class="scenario-header">
+                            <div class="scenario-number">01</div>
+                            <h3>Simulador de Carburantes</h3>
+                        </div>
+                        <div class="scenario-body">
+                            <p><strong>Situación:</strong> Una estación de servicio enfrenta escasez de combustible.</p>
+                            <ul class="scenario-features">
+                                <li>✓ Proyección de autonomía</li>
+                                <li>✓ Alertas de nivel crítico</li>
+                                <li>✓ Comparativa de consumos</li>
+                                <li>✓ Gráficos de tendencia</li>
+                            </ul>
+                            <a href="pages/carburantes.html" class="btn btn-outline-primary btn-sm w-100 mt-4">
+                                Acceder al Simulador →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Escenario E: Pánico -->
+                <div class="col-lg-4">
+                    <div class="scenario-card scenario-panic">
+                        <div class="scenario-header">
+                            <div class="scenario-number">02</div>
+                            <h3>Pánico de Compras</h3>
+                        </div>
+                        <div class="scenario-body">
+                            <p><strong>Situación:</strong> Los rumores disparan la demanda iracionalmente.</p>
+                            <ul class="scenario-features">
+                                <li>✓ Cálculo de nueva demanda</li>
+                                <li>✓ Detección de desabastecimiento</li>
+                                <li>✓ Análisis de impacto</li>
+                                <li>✓ Tablas comparativas</li>
+                            </ul>
+                            <a href="pages/escasez.html" class="btn btn-outline-danger btn-sm w-100 mt-4">
+                                Acceder al Simulador →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Escenario F: Poder Adquisitivo -->
+                <div class="col-lg-4">
+                    <div class="scenario-card scenario-power">
+                        <div class="scenario-header">
+                            <div class="scenario-number">03</div>
+                            <h3>Poder Adquisitivo</h3>
+                        </div>
+                        <div class="scenario-body">
+                            <p><strong>Situación:</strong> Inflación vs. ingresos congelados.</p>
+                            <ul class="scenario-features">
+                                <li>✓ Cálculo de pérdida adquisitiva</li>
+                                <li>✓ Impacto por producto</li>
+                                <li>✓ Nivel de afectación</li>
+                                <li>✓ Proyecciones mensuales</li>
+                            </ul>
+                            <a href="pages/poder-adquisitivo.html" class="btn btn-outline-info btn-sm w-100 mt-4">
+                                Acceder al Simulador →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASOS DE ESTUDIO RESUMEN -->
+    <section class="casos-section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Casos de Estudio Predefinidos</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="caso-card">
+                        <h4 class="text-primary">📊 Caso: Carburantes</h4>
+                        <div class="caso-data">
+                            <p><small>Reserva: 10,000 L | Consumo: 1,200 L/día</small></p>
+                            <p><small>Reabastecimiento: 300 L/día</small></p>
+                            <p><small><strong>Resultado:</strong> 9 días hasta nivel crítico</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="caso-card">
+                        <h4 class="text-danger">📊 Caso: Pánico de Compras</h4>
+                        <div class="caso-data">
+                            <p><small>Demanda Normal: 100 unidades</small></p>
+                            <p><small>Aumento: 40% | Stock: 120 unidades</small></p>
+                            <p><small><strong>Resultado:</strong> Déficit de 20 unidades</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="caso-card">
+                        <h4 class="text-info">📊 Caso: Poder Adquisitivo</h4>
+                        <div class="caso-data">
+                            <p><small>Gasto Anterior: 184 Bs | Gasto Actual: 262 Bs</small></p>
+                            <p><small>Aumento: 78 Bs (42.4%)</small></p>
+                            <p><small><strong>Nivel:</strong> Crítico</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONCLUSIONES -->
+    <section class="conclusiones-section py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Aprendizajes Clave</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="learning-item">
+                        <h4>🎯 Modelado Matemático</h4>
+                        <p>Las ecuaciones simples revelan impactos complejos. Comprender la lógica detrás de cada crisis permite anticipar soluciones.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="learning-item">
+                        <h4>📈 Comportamiento del Mercado</h4>
+                        <p>El pánico y los rumores generan ciclos que se alimentan a sí mismos. La información transparente es la mejor herramienta preventiva.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="learning-item">
+                        <h4>💡 Política Económica</h4>
+                        <p>Las decisiones de gobiernos y empresas tienen consecuencias directas en la vida cotidiana de millones de familias.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="learning-item">
+                        <h4>🔄 Interconexión Sistémica</h4>
+                        <p>La escasez, el pánico y la inflación están conectados. Resolver una crisis requiere atacar múltiples frentes simultáneamente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER CON CRÉDITOS -->
+    <footer class="footer-section py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0"><strong>Crisis Economics Simulator</strong></p>
+                    <small class="text-muted">Herramienta educativa de simulación socioeconómica</small>
+                </div>
+                <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                    <p class="mb-0"><strong>Estudiante:</strong>Aleyu</p>
+                    <small class="text-muted">Materia: Programación Web </small>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <small class="text-muted">
+                        © 2024 Crisis Economics Simulator | Desarrollado con HTML5, CSS3, JavaScript y Bootstrap
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
