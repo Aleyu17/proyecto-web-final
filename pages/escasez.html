@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Pánico de Compras | Crisis Economics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <!-- NAVBAR FIJA -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="../index.html">
+                <span class="brand-icon">⚡</span> Crisis Economics
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="carburantes.html">Carburantes</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="escasez.html">Pánico de Compras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="poder-adquisitivo.html">Poder Adquisitivo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="pt-5">
+        <!-- HEADER DEL SIMULADOR -->
+        <section class="simulator-header-panic py-5">
+            <div class="container">
+                <h1 class="simulator-title">Simulador de Pánico de Compras por Escasez</h1>
+                <p class="simulator-subtitle">
+                    Observa cómo los rumores generan comportamiento irracional que desestabiliza los inventarios
+                </p>
+            </div>
+        </section>
+
+        <!-- CONTEXTO Y PROBLEMA -->
+        <section class="contexto-detailed py-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3 class="text-danger mb-3">📍 Situación del Escenario</h3>
+                        <p>
+                            Un rumor en redes sociales afirma que habrá desabastecimiento de ciertos productos. 
+                            La población, por temor a quedarse sin productos, comienza a comprar en cantidades mucho 
+                            mayores a lo normal. Este comportamiento colectivo crea una profecía autocumplida: lo que 
+                            era un rumor de escasez se convierte en realidad cuando el stock se agota.
+                        </p>
+                        <p class="text-muted mt-3">
+                            <strong>Objetivos:</strong> Calcular el impacto real del pánico en la demanda, determinar 
+                            si el stock disponible es suficiente, e identificar en qué momento se presenta desabastecimiento.
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="info-card-panic">
+                            <h5>Variables Clave</h5>
+                            <ul class="small">
+                                <li>Demanda Normal</li>
+                                <li>% Aumento por Pánico</li>
+                                <li>Stock Disponible</li>
+                                <li>Número de Compradores</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULADOR INTERACTIVO -->
+        <section class="simulator-section py-5">
+            <div class="container">
+                <div class="row">
+                    <!-- FORMULARIO -->
+                    <div class="col-lg-5">
+                        <div class="form-card">
+                            <h3 class="form-title">🛒 Ingresar Datos de Mercado</h3>
+                            <form id="form-escasez">
+                                <div class="mb-3">
+                                    <label for="demandaNormal" class="form-label">
+                                        Demanda Normal (unidades/día)
+                                    </label>
+                                    <input type="number" class="form-control" id="demandaNormal" 
+                                           placeholder="Ej: 100" min="1" required>
+                                    <small class="text-muted">Venta promedio antes del rumor</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="porcentajeAumento" class="form-label">
+                                        Aumento de Demanda por Pánico (%)
+                                    </label>
+                                    <input type="number" class="form-control" id="porcentajeAumento" 
+                                           placeholder="Ej: 40" min="0" step="0.1" required>
+                                    <small class="text-muted">Incremento porcentual de compras</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="stockDisponible" class="form-label">
+                                        Stock Disponible (unidades)
+                                    </label>
+                                    <input type="number" class="form-control" id="stockDisponible" 
+                                           placeholder="Ej: 120" min="0" required>
+                                    <small class="text-muted">Inventario total en almacén</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="numeroCompradores" class="form-label">
+                                        Número de Compradores
+                                    </label>
+                                    <input type="number" class="form-control" id="numeroCompradores" 
+                                           placeholder="Ej: 50" min="1" required>
+                                    <small class="text-muted">Clientes demandando el producto</small>
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-danger btn-lg">
+                                        🔄 Simular Pánico
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- CASOS DE ESTUDIO -->
+                        <div class="casos-predefinidos mt-4">
+                            <h5 class="mb-3">📋 Casos Predefinidos</h5>
+                            <button class="btn btn-outline-secondary btn-sm w-100 mb-2" id="caso1-btn">
+                                Caso 1: Pánico Leve
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm w-100 mb-2" id="caso2-btn">
+                                Caso 2: Pánico Moderado
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm w-100" id="caso3-btn">
+                                Caso 3: Pánico Masivo
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- RESULTADOS -->
+                    <div class="col-lg-7">
+                        <div id="resultados-container" class="results-container">
+                            <div class="placeholder-result text-center py-5">
+                                <p class="text-muted">💡 Ingresa los datos y haz clic en "Simular Pánico" para ver los resultados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ANÁLISIS DETALLADO -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h3 class="mb-4 text-danger">📊 Análisis de Impacto del Pánico</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="comparativa-demanda" class="results-container">
+                            <p class="text-muted text-center py-4">Los datos de comparación aparecerán aquí</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="distribucion-compradores" class="results-container">
+                            <p class="text-muted text-center py-4">La distribución de compras aparecerá aquí</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INDICADORES CLAVE -->
+        <section class="py-5">
+            <div class="container">
+                <h3 class="mb-4 text-danger">⚠️ Indicadores de Riesgo</h3>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="indicator-card">
+                            <h5>Cobertura de Stock</h5>
+                            <p id="indicator-cobertura" class="indicator-value">-</p>
+                            <small class="text-muted">Días que dura el inventario</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="indicator-card">
+                            <h5>Déficit Proyectado</h5>
+                            <p id="indicator-deficit" class="indicator-value">-</p>
+                            <small class="text-muted">Unidades faltantes</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="indicator-card">
+                            <h5>Compra Promedio/Persona</h5>
+                            <p id="indicator-promedio" class="indicator-value">-</p>
+                            <small class="text-muted">Unidades por comprador</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="indicator-card">
+                            <h5>Aumento Demanda Total</h5>
+                            <p id="indicator-aumento" class="indicator-value">-</p>
+                            <small class="text-muted">Unidades adicionales</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRÁFICO COMPARATIVO -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h3 class="mb-4 text-danger">📈 Gráfico: Stock vs Demanda</h3>
+                <div class="chart-wrapper">
+                    <canvas id="grafico-escasez"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- REFLEXIÓN SOBRE PSICOLOGÍA ECONÓMICA -->
+        <section class="py-5">
+            <div class="container">
+                <div class="alert alert-warning border-2 border-danger">
+                    <h5 class="text-danger">💭 La Profecía Autocumplida en Economía</h5>
+                    <p>
+                        Este simulador demuestra un fenómeno psicológico crítico: cuando la gente <strong>cree</strong> 
+                        que habrá escasez, su comportamiento de compra genera la escasez real. Los rumores no solo afectan 
+                        la percepción, sino que crean realidades económicas concretas. La mejor prevención es la 
+                        <strong>comunicación transparente</strong> de los gobiernos y empresas sobre el estado real de los inventarios.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-section py-4 mt-5">
+        <div class="container">
+            <p class="mb-2"><strong>Crisis Economics | Simulador de Pánico de Compras</strong></p>
+            <small class="text-muted">Modelo Matemático: Nueva_Demanda = Demanda_Normal + (Demanda_Normal × %_Aumento)</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/escasez.js"></script>
+</body>
+</html>

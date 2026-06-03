@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Poder Adquisitivo | Crisis Economics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <!-- NAVBAR FIJA -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="../index.html">
+                <span class="brand-icon">⚡</span> Crisis Economics
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="carburantes.html">Carburantes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="escasez.html">Pánico de Compras</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="poder-adquisitivo.html">Poder Adquisitivo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="pt-5">
+        <!-- HEADER DEL SIMULADOR -->
+        <section class="simulator-header-power py-5">
+            <div class="container">
+                <h1 class="simulator-title">Simulador de Pérdida del Poder Adquisitivo</h1>
+                <p class="simulator-subtitle">
+                    Visualiza cómo la inflación erosiona el poder de compra de una familia con ingresos congelados
+                </p>
+            </div>
+        </section>
+
+        <!-- CONTEXTO Y PROBLEMA -->
+        <section class="contexto-detailed py-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3 class="text-info mb-3">📍 Situación del Escenario</h3>
+                        <p>
+                            Una familia mantiene un ingreso mensual fijo mientras los precios de los productos 
+                            básicos se incrementan sostenidamente. Con el mismo dinero que ganaba hace meses, ahora 
+                            puede comprar menos cantidad de alimentos y servicios. Este fenómeno, llamado inflación, 
+                            reduce directamente el poder de compra de la moneda y afecta el nivel de vida de millones.
+                        </p>
+                        <p class="text-muted mt-3">
+                            <strong>Objetivos:</strong> Cuantificar exactamente cuánto dinero extra gasta la familia, 
+                            calcular el porcentaje de pérdida del poder adquisitivo, y clasificar el nivel de afectación.
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="info-card-power">
+                            <h5>Variables Clave</h5>
+                            <ul class="small">
+                                <li>Ingreso Familiar</li>
+                                <li>Gasto Anterior</li>
+                                <li>Gasto Actual</li>
+                                <li>Precios (antes/después)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULADOR INTERACTIVO -->
+        <section class="simulator-section py-5">
+            <div class="container">
+                <div class="row">
+                    <!-- FORMULARIO -->
+                    <div class="col-lg-5">
+                        <div class="form-card">
+                            <h3 class="form-title">💰 Datos de la Familia</h3>
+                            <form id="form-poder">
+                                <div class="mb-3">
+                                    <label for="ingresoFamiliar" class="form-label">
+                                        Ingreso Familiar Mensual (Bs)
+                                    </label>
+                                    <input type="number" class="form-control" id="ingresoFamiliar" 
+                                           placeholder="Ej: 2500" min="0" step="0.01" required>
+                                    <small class="text-muted">Sueldo total familiar</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="gastoAnterior" class="form-label">
+                                        Gasto Mensual Anterior (Bs)
+                                    </label>
+                                    <input type="number" class="form-control" id="gastoAnterior" 
+                                           placeholder="Ej: 1800" min="0" step="0.01" required>
+                                    <small class="text-muted">Lo que gastaba antes de la inflación</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="gastoActual" class="form-label">
+                                        Gasto Mensual Actual (Bs)
+                                    </label>
+                                    <input type="number" class="form-control" id="gastoActual" 
+                                           placeholder="Ej: 2400" min="0" step="0.01" required>
+                                    <small class="text-muted">Lo que gasta ahora en los mismos productos</small>
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-info btn-lg">
+                                        📊 Calcular Impacto
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- TABLA DE PRODUCTOS -->
+                            <div class="mt-4">
+                                <h5 class="form-title">🛍️ Canasta Básica de Productos</h5>
+                                <form id="form-productos">
+                                    <div id="productos-container"></div>
+                                    <button type="button" class="btn btn-outline-info btn-sm w-100 mt-3" id="btn-agregar-producto">
+                                        + Agregar Producto
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RESULTADOS -->
+                    <div class="col-lg-7">
+                        <div id="resultados-container" class="results-container">
+                            <div class="placeholder-result text-center py-5">
+                                <p class="text-muted">💡 Ingresa los datos y haz clic en "Calcular Impacto" para ver los resultados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASOS DE ESTUDIO -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h3 class="mb-4 text-info">📋 Casos de Estudio Predefinidos</h3>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="case-study-card">
+                            <h5>Caso 1: Inflación Moderada</h5>
+                            <p><small><strong>Ingreso:</strong> 2,500 Bs</small></p>
+                            <p><small><strong>Gasto Anterior:</strong> 1,800 Bs</small></p>
+                            <p><small><strong>Gasto Actual:</strong> 2,000 Bs</small></p>
+                            <button class="btn btn-outline-info btn-sm w-100" id="caso1-btn">
+                                Cargar Caso
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="case-study-card">
+                            <h5>Caso 2: Inflación Severa</h5>
+                            <p><small><strong>Ingreso:</strong> 2,500 Bs</small></p>
+                            <p><small><strong>Gasto Anterior:</strong> 1,800 Bs</small></p>
+                            <p><small><strong>Gasto Actual:</strong> 2,400 Bs</strong></p>
+                            <button class="btn btn-outline-danger btn-sm w-100" id="caso2-btn">
+                                Cargar Caso
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="case-study-card">
+                            <h5>Caso 3: Crisis Total</h5>
+                            <p><small><strong>Ingreso:</strong> 2,500 Bs</small></p>
+                            <p><small><strong>Gasto Anterior:</strong> 2,000 Bs</small></p>
+                            <p><small><strong>Gasto Actual:</strong> 3,200 Bs</small></p>
+                            <button class="btn btn-outline-danger btn-sm w-100" id="caso3-btn">
+                                Cargar Caso
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ANÁLISIS DE PRODUCTOS -->
+        <section class="py-5">
+            <div class="container">
+                <h3 class="mb-4 text-info">📈 Análisis Detallado por Producto</h3>
+                <div id="tabla-productos" class="table-responsive">
+                    <p class="text-muted text-center py-4">La tabla de productos aparecerá después de calcular</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- INDICADORES DE AFECTACIÓN -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h3 class="mb-4 text-info">⚠️ Nivel de Afectación Familiar</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="impact-indicator">
+                            <h5>Incremento Total de Gastos</h5>
+                            <p id="incremento-bs" class="value-large">-</p>
+                            <p class="text-muted"><small>Dinero adicional necesario</small></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="impact-indicator">
+                            <h5>Pérdida del Poder Adquisitivo</h5>
+                            <p id="perdida-porcentaje" class="value-large">-</p>
+                            <p class="text-muted"><small>Porcentaje de erosión</small></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="impact-indicator">
+                            <h5>Saldo Anterior (Ingreso - Gasto)</h5>
+                            <p id="saldo-anterior" class="value-large">-</p>
+                            <p class="text-muted"><small>Dinero disponible antes</small></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="impact-indicator">
+                            <h5>Saldo Actual (Ingreso - Gasto)</h5>
+                            <p id="saldo-actual" class="value-large">-</p>
+                            <p class="text-muted"><small>Dinero disponible ahora</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NIVEL DE AFECTACIÓN CLASIFICADO -->
+        <section class="py-5">
+            <div class="container">
+                <h3 class="mb-4 text-info">📊 Clasificación de Afectación</h3>
+                <div id="clasificacion-container" class="results-container">
+                    <p class="text-muted text-center py-4">Se mostrará la clasificación después de calcular</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRÁFICO COMPARATIVO -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h3 class="mb-4 text-info">📈 Gráfico: Gastos Antes vs Después</h3>
+                <div class="chart-wrapper">
+                    <canvas id="grafico-poder"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- REFLEXIÓN SOBRE INFLACIÓN -->
+        <section class="py-5">
+            <div class="container">
+                <div class="alert alert-info border-2 border-info">
+                    <h5 class="text-info">📚 Entendiendo la Inflación</h5>
+                    <p>
+                        La inflación no es simplemente "precios más altos". Es la <strong>erosión del valor de tu dinero</strong>. 
+                        Cuando los salarios no crecen al mismo ritmo que los precios, las familias pierden poder adquisitivo. 
+                        Este simulador muestra por qué las personas en crisis económicas se sienten "más pobres" aunque 
+                        ganen el mismo sueldo. La inflación es una transferencia invisible de riqueza desde los trabajadores 
+                        con ingresos fijos hacia otros sectores de la economía.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-section py-4 mt-5">
+        <div class="container">
+            <p class="mb-2"><strong>Crisis Economics | Simulador de Poder Adquisitivo</strong></p>
+            <small class="text-muted">Modelo Matemático: Pérdida% = ((Gasto_Actual - Gasto_Anterior) / Gasto_Anterior) × 100</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/poder-adquisitivo.js"></script>
+</body>
+</html>
